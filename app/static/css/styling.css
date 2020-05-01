@@ -1,0 +1,46 @@
+body, html {
+  font-family: "Lato", sans-serif;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+#title{
+  font-size: 3.5rem;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+  color: white;
+}
+
+.subsection{
+  color: #777;
+  padding: 50px 80px;
+}
+
+.description{
+  line-height: 150%;
+  font-size: 1.1rem;
+}
+
+.subtitle{
+  font-size: 1.3rem;
+  text-align: center;
+  color: black;
+}
+
+.parallax {
+  /* The image used */
+  background-image: url("../img/lukasz-szmigiel-forest.jpg");
+
+  /* Full height */
+  height: 100%;
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
