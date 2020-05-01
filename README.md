@@ -4,4 +4,4 @@ This project is a website that will be used to display visually show the change 
 Data is courtesy of Berkeley earth and can be found [here](https://www.kaggle.com/berkeleyearth/climate-change-earth-surface-temperature-data/data)
 
 
-[Climate Change: Earth Surface Temperature Data](https://www.kaggle.com/berkeleyearth/climate-change-earth-surface-temperature-data/data) by [Berkeley Earth] (http://berkeleyearth.org/) is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+[Climate Change: Earth Surface Temperature Data](https://www.kaggle.com/berkeleyearth/climate-change-earth-surface-temperature-data/data) by [Berkeley Earth](http://berkeleyearth.org/) is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
