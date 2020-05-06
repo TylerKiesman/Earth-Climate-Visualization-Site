@@ -10,11 +10,24 @@ curDir = os.path.dirname(__file__)
 global_temp_path = os.path.abspath(os.path.join(curDir, "..", "data", "GlobalTemperatures.csv"))
 l_and_o_yearly_data = land_and_ocean_yearly(global_temp_path)
 year_to_temps = l_and_o_yearly_data[0]
-df = pd.DataFrame(columns=["Year", "Average Global Temperature"])
+year_to_error = l_and_o_yearly_data[1]
+df = pd.DataFrame(columns=["Year", "Average Global Temperature", "Error"])
 for year in year_to_temps:
-    df2 = pd.DataFrame([[year, year_to_temps.get(year)]], columns=["Year", "Average Global Temperature"])
+    df2 = pd.DataFrame([[year, year_to_temps.get(year), year_to_error.get(year)]], columns=["Year", "Average Global Temperature", "Error"])
     df = df.append(df2)
-fig = px.line(df, x="Year", y="Average Global Temperature", title='Test')
+fig = px.line(df, x="Year", y="Average Global Temperature", title='Test', error_y="Error")
+line_obj = fig.data[0]
+line_obj.line.color = "#FF0800"
+line_obj.mode = "lines+markers"
+line_obj.marker = {
+            "color":'#4C516D'}
+line_obj.error_y.color = "black"
+line_obj.error_y.thickness = .7
+line_obj.error_y.width = 0
+fig.update_layout(
+    title="Global Average Yearly Temperature 1850 - 2015",
+    yaxis_title="Global Temperature (" + u"\u2103" + ")"
+)
 data = [fig]
 
 lineJSON = json.dumps(data, cls=plotly.utils.PlotlyJSONEncoder)

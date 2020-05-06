@@ -27,7 +27,9 @@ body, html {
   font-size: 1.8rem;
   text-align: center;
 }
-
+.graphFooter{
+  text-align: center;
+}
 .parallax {
   /* Create the parallax scrolling effect */
   position: relative;

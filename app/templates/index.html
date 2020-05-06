@@ -24,9 +24,13 @@
         <div class="chart" id="yearly_temps">
             <script>
                 var graphs = {{plot | safe}};
-                Plotly.newPlot('yearly_temps',graphs[0].data,{});
+                data = graphs[0].data;
+                layout = graphs[0].layout;
+                Plotly.plot('yearly_temps', data, layout);
             </script>
         </div>
+        <footer class="graphFooter"><br><i>Data from data set 'Climate Change: Earth Surface Temperature Data' by Berkeley Earth<br>
+            Vertical lines indicate 95% confidence intervals</i></footer>
     </div>
     </body>
 </html>
