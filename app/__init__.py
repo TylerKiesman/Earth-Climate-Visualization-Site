@@ -4,12 +4,9 @@ from app.generatePoints import *
 import plotly.express as px
 import plotly
 import pandas as pd
-import json, copy
-import matplotlib.pyplot as plt
+import json
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
-
-lin = LinearRegression()
 
 curDir = os.path.dirname(__file__)
 global_temp_path = os.path.abspath(os.path.join(curDir, "..", "data", "GlobalTemperatures.csv"))
@@ -24,18 +21,12 @@ fig = px.line(df, x="Year", y="Average Global Temperature", title='Test', error_
 
 x = df.iloc[:, 0:1].values
 y = df.iloc[:, 1].values
-# poly = PolynomialFeatures(degree = 4)
-# X_poly = poly.fit_transform(x)
-lin.fit(x, y)
-plt.scatter(x, y, color='blue')
-
-#plt.plot(x, lin.predict(poly.fit_transform(x)), color='red')
-plt.plot(x, lin.predict(x))
-plt.title('Polynomial Regression')
-plt.xlabel('Temperature')
-plt.ylabel('Pressure')
-
-plt.show()
+poly = PolynomialFeatures(degree=2)
+X_poly = poly.fit_transform(x)
+poly.fit(X_poly, y)
+lin = LinearRegression()
+lin.fit(X_poly, y)
+print(lin.predict(poly.fit_transform([[2050]])))
 
 line_obj = fig.data[0]
 line_obj.line.color = "#FF0800"
