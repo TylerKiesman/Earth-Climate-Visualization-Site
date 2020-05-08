@@ -53,3 +53,10 @@ body, html {
   background-color: #2b2c30;
   color: white;
 }
+
+#earth_prediction{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}

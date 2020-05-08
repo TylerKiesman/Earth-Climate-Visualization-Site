@@ -5,6 +5,7 @@ import plotly.express as px
 import plotly
 import pandas as pd
 import json
+import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
 
@@ -26,7 +27,16 @@ X_poly = poly.fit_transform(x)
 poly.fit(X_poly, y)
 lin = LinearRegression()
 lin.fit(X_poly, y)
-print(lin.predict(poly.fit_transform([[2050]])))
+plt.scatter(x, y, color="#4C516D")
+
+plt.plot(x, lin.predict(poly.fit_transform(x)), color="#FF0800")
+plt.title("Global Temperature Regression Model")
+plt.xlabel("Year")
+plt.ylabel("Global Temperature (" + u"\u2103" + ")")
+
+prediction_val = round(lin.predict(poly.fit_transform([[2050]]))[0], 2)
+
+plt.savefig(os.path.abspath(os.path.join(curDir, "static", "img", "earth_pred.png")))
 
 line_obj = fig.data[0]
 line_obj.line.color = "#FF0800"
