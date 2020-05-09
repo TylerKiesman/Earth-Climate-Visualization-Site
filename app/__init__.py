@@ -55,7 +55,38 @@ data = [fig]
 lineJSON = json.dumps(data, cls=plotly.utils.PlotlyJSONEncoder)
 
 state_temps_path = os.path.abspath(os.path.join(curDir, "..", "data", "GlobalLandTemperaturesByState.csv"))
-state_data = state_average_two_years(1900, 2000, state_temps_path)
+year1 = 1900
+year2 = 2000
+years_after = 10
+state_data = state_average_two_years(year1, year2, years_after, state_temps_path)
+year1_data = state_data[0]
+year2_data = state_data[1]
+
+df = pd.DataFrame(columns=["State", "Temperature"])
+for state in year1_data:
+    df2 = pd.DataFrame([[state, year1_data.get(state)]], columns=["State", "Temperature"])
+    df = df.append(df2)
+states = df["State"]
+temps = df["Temperature"]
+fig = px.choropleth(locations=states, locationmode="USA-states", color=temps, scope="usa",
+                    color_continuous_scale=["#4197b0", "#ffffad", "#ffcb58", "#e0603f"], range_color=[5, 15],
+                    title="Average State Temperatures between " + str(year1) + " and " + str(year1 + years_after),
+                    labels={"locations": "State", "color": "Temperature(" + u"\u2103" + ")"})
+
+fig.show()
+
+df = pd.DataFrame(columns=["State", "Temperature"])
+for state in year2_data:
+    df2 = pd.DataFrame([[state, year2_data.get(state)]], columns=["State", "Temperature"])
+    df = df.append(df2)
+states = df["State"]
+temps = df["Temperature"]
+fig = px.choropleth(locations=states, locationmode="USA-states", color=temps, scope="usa",
+                    color_continuous_scale=["#4197b0", "#ffffad", "#ffcb58", "#e0603f"], range_color=[5, 15],
+                    title="Average State Temperatures between " + str(year2) + " and " + str(year2 + years_after),
+                    labels={"locations": "State", "color": "Temperature(" + u"\u2103" + ")"})
+
+fig.show()
 
 app = Flask(__name__)
 

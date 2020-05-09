@@ -17,7 +17,7 @@ def state_name_to_code(name):
         'Delaware': 'DE',
         'District of Columbia': 'DC',
         'Florida': 'FL',
-        'Georgia': 'GA',
+        'Georgia (State)': 'GA',
         'Guam': 'GU',
         'Hawaii': 'HI',
         'Idaho': 'ID',
@@ -66,10 +66,10 @@ def state_name_to_code(name):
 
     return us_state_abbrev.get(name)
 
-def state_average_two_years(year1, year2, filepath):
+def state_average_two_years(year1, year2, years_after, filepath):
     file = open(filepath, 'r')
-    year1_state_to_average = dict()
-    year2_state_to_average = dict()
+    period1_state_to_average = dict()
+    period2_state_to_average = dict()
 
     # Get rid of first line that only is the column names
     file.readline()
@@ -83,14 +83,14 @@ def state_average_two_years(year1, year2, filepath):
             if split_data[1] == '':
                 continue
             monthly_temp = float(split_data[1])
-            if year == year1:
-                add_to_dict(state_name_to_code(state), monthly_temp, year1_state_to_average)
-            if year == year2:
-                add_to_dict(state_name_to_code(state), monthly_temp, year2_state_to_average)
-    for key in year2_state_to_average:
-        year2_state_to_average[key] = year2_state_to_average.get(key) / 12
-        year1_state_to_average[key] = year1_state_to_average.get(key) / 12
-    return [year1_state_to_average, year2_state_to_average]
+            if year in range(year1, year1 + years_after):
+                add_to_dict(state_name_to_code(state), monthly_temp, period1_state_to_average)
+            if year in range(year2, year2 + years_after):
+                add_to_dict(state_name_to_code(state), monthly_temp, period2_state_to_average)
+    for key in period2_state_to_average:
+        period2_state_to_average[key] = round(period2_state_to_average.get(key) / (12 * years_after), 2)
+        period1_state_to_average[key] = round(period1_state_to_average.get(key) / (12 * years_after), 2)
+    return [period1_state_to_average, period2_state_to_average]
 
 def land_and_ocean_yearly(filepath):
     file = open(filepath, 'r')
