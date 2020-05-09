@@ -63,9 +63,8 @@ def state_name_to_code(name):
         'Wisconsin': 'WI',
         'Wyoming': 'WY'
     }
-    abbrev_us_state = dict(map(reversed, us_state_abbrev.items()))
 
-    return abbrev_us_state.get(name)
+    return us_state_abbrev.get(name)
 
 def state_average_two_years(year1, year2, filepath):
     file = open(filepath, 'r')
@@ -78,10 +77,20 @@ def state_average_two_years(year1, year2, filepath):
     for line in data:
         split_data = line.split(',')
         year = int(split_data[0].split('-')[0])
-        if year == str(year1):
-            print()
-        if year == str(year2):
-            print()
+        state = split_data[3]
+        country = split_data[4]
+        if "United States" in country:
+            if split_data[1] == '':
+                continue
+            monthly_temp = float(split_data[1])
+            if year == year1:
+                add_to_dict(state_name_to_code(state), monthly_temp, year1_state_to_average)
+            if year == year2:
+                add_to_dict(state_name_to_code(state), monthly_temp, year2_state_to_average)
+    for key in year2_state_to_average:
+        year2_state_to_average[key] = year2_state_to_average.get(key) / 12
+        year1_state_to_average[key] = year1_state_to_average.get(key) / 12
+    return [year1_state_to_average, year2_state_to_average]
 
 def land_and_ocean_yearly(filepath):
     file = open(filepath, 'r')

@@ -54,6 +54,9 @@ data = [fig]
 
 lineJSON = json.dumps(data, cls=plotly.utils.PlotlyJSONEncoder)
 
+state_temps_path = os.path.abspath(os.path.join(curDir, "..", "data", "GlobalLandTemperaturesByState.csv"))
+state_data = state_average_two_years(1900, 2000, state_temps_path)
+
 app = Flask(__name__)
 
 from app import routes
