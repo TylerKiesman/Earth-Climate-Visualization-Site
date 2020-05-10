@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/styling.css') }}">
+        <link rel= "stylesheet" type= "text/css" href="{{ url_for('static',filename='css/styling.css') }}">
         <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
         <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
@@ -31,16 +31,17 @@
         temperature.<br>If this trend continues we could see Earth's average temperature reach
         around {{ pred }}&#8451; by 2050.</i></footer>
         <br>
-        <div class="chart" id="period1"></div>
-        <div class="chart" id="period2"></div>
+        <div class="chart" id="period"></div>
+        <div id="mapButtons">
+            <button class="periodButton" onclick="updatePeriod(1)">{{ year1 }} to {{ ped1 }}</button>
+            <button class="periodButton" onclick="updatePeriod(2)">{{ year2 }} to {{ ped2 }}</button>
+        </div>
     </div>
     </body>
     <script>
             // Average global temperature plot
             showPlot({{plot | safe}}, 'yearly_temps');
             // Time period one choropleth map
-            showPlot({{period1 | safe}}, 'period1');
-            // Time period two choropleth map
-            showPlot({{period2 | safe}}, 'period2');
+            showPlot({{period | safe}}, 'period');
     </script>
 </html>
