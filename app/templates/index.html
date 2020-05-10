@@ -6,6 +6,7 @@
         <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
         <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+        <script src="{{ url_for('static',filename='js/loadPlots.js') }}"></script>
     </head>
     <body>
     <div class="parallax" id="openPic">
@@ -21,14 +22,7 @@
     </div>
     <div class="subsection" id="data">
         <h3 class="subtitle"><b>The Data</b></h3>
-        <div class="chart" id="yearly_temps">
-            <script>
-                var graphs = {{plot | safe}};
-                data = graphs[0].data;
-                layout = graphs[0].layout;
-                Plotly.plot('yearly_temps', data, layout);
-            </script>
-        </div>
+        <div class="chart" id="yearly_temps"></div>
         <footer class="graphFooter"><br><i>Data from data set 'Climate Change: Earth Surface Temperature Data' by Berkeley Earth<br>
             Vertical lines indicate 95% confidence intervals</i></footer>
         <br>
@@ -36,6 +30,17 @@
         <footer class="graphFooter"><br><i>Regression model showing the exponential increase in earth's
         temperature.<br>If this trend continues we could see Earth's average temperature reach
         around {{ pred }}&#8451; by 2050.</i></footer>
+        <br>
+        <div class="chart" id="period1"></div>
+        <div class="chart" id="period2"></div>
     </div>
     </body>
+    <script>
+            // Average global temperature plot
+            showPlot({{plot | safe}}, 'yearly_temps');
+            // Time period one choropleth map
+            showPlot({{period1 | safe}}, 'period1');
+            // Time period two choropleth map
+            showPlot({{period2 | safe}}, 'period2');
+    </script>
 </html>

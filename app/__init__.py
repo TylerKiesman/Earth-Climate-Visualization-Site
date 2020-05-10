@@ -27,7 +27,7 @@ X_poly = poly.fit_transform(x)
 poly.fit(X_poly, y)
 lin = LinearRegression()
 lin.fit(X_poly, y)
-plt.scatter(x, y, color="#4C516D")
+plt.scatter(x, y, color="#4C516D", s=10)
 
 plt.plot(x, lin.predict(poly.fit_transform(x)), color="#FF0800")
 plt.title("Global Temperature Regression Model")
@@ -52,7 +52,7 @@ fig.update_layout(
 )
 data = [fig]
 
-lineJSON = json.dumps(data, cls=plotly.utils.PlotlyJSONEncoder)
+yearly_fig = json.dumps(data, cls=plotly.utils.PlotlyJSONEncoder)
 
 state_temps_path = os.path.abspath(os.path.join(curDir, "..", "data", "GlobalLandTemperaturesByState.csv"))
 year1 = 1900
@@ -72,8 +72,13 @@ fig = px.choropleth(locations=states, locationmode="USA-states", color=temps, sc
                     color_continuous_scale=["#4197b0", "#ffffad", "#ffcb58", "#e0603f"], range_color=[5, 15],
                     title="Average State Temperatures between " + str(year1) + " and " + str(year1 + years_after),
                     labels={"locations": "State", "color": "Temperature(" + u"\u2103" + ")"})
+fig.update_layout(
+    dragmode=False
+)
+data = [fig]
 
-fig.show()
+period1_fig = json.dumps(data, cls=plotly.utils.PlotlyJSONEncoder)
+
 
 df = pd.DataFrame(columns=["State", "Temperature"])
 for state in year2_data:
@@ -86,7 +91,13 @@ fig = px.choropleth(locations=states, locationmode="USA-states", color=temps, sc
                     title="Average State Temperatures between " + str(year2) + " and " + str(year2 + years_after),
                     labels={"locations": "State", "color": "Temperature(" + u"\u2103" + ")"})
 
-fig.show()
+fig.update_layout(
+    dragmode=False
+)
+data = [fig]
+
+period2_fig = json.dumps(data, cls=plotly.utils.PlotlyJSONEncoder)
+
 
 app = Flask(__name__)
 
