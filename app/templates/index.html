@@ -18,24 +18,34 @@
         An increase in waste from human activities such as greenhouse gasses has resulted in a rise of the Earth's
         temperature which is now starting to devastate ecosystems. This
         web page helps display this information through different charts and maps in
-        hopes of showing just how big of a change has occurred. Scroll below to take a look at them!</p>
+        hopes of showing just how big of a change has occurred. Scroll below to take a look at them! (All
+        data from data set 'Climate Change: Earth Surface Temperature Data' by Berkeley Earth on Kaggle)</p>
     </div>
     <div class="subsection" id="data">
         <h3 class="subtitle"><b>The Data</b></h3>
+        <br>
+        <br>
+        <h3 class="subtitle">The Increase In Earth's Average Temperature</h3>
         <div class="chart" id="yearly_temps"></div>
         <footer class="graphFooter"><br><i>Data from data set 'Climate Change: Earth Surface Temperature Data' by Berkeley Earth<br>
             Vertical lines indicate 95% confidence intervals</i></footer>
         <br>
+        <br>
+        <h3 class="subtitle">The Trend Line Showing This Increase</h3>
         <img src='static/img/earth_pred.png' id="earth_prediction">
-        <footer class="graphFooter"><br><i>Regression model showing the exponential increase in earth's
+        <footer class="graphFooter"><br><i>This regression model shows the exponential increase in Earth's
         temperature.<br>If this trend continues we could see Earth's average temperature reach
         around {{ pred }}&#8451; by 2050.</i></footer>
         <br>
+        <br>
+        <h3 class="subtitle">The Changing Temperatures Across States</h3>
         <div class="chart" id="period"></div>
         <div id="mapButtons">
             <button class="periodButton" onclick="updatePeriod(1)">{{ year1 }} to {{ ped1 }}</button>
             <button class="periodButton" onclick="updatePeriod(2)">{{ year2 }} to {{ ped2 }}</button>
         </div>
+        <footer class="graphFooter"><br><i>We can see in this one hundred year difference the increase in
+            temperatures for each state.</i></footer>
     </div>
     </body>
     <script>

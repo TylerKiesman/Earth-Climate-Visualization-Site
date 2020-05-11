@@ -4,6 +4,7 @@ def add_to_dict(key, value, dict):
     else:
         dict[key] = value
 
+
 def state_name_to_code(name):
     us_state_abbrev = {
         'Alabama': 'AL',
@@ -66,6 +67,7 @@ def state_name_to_code(name):
 
     return us_state_abbrev.get(name)
 
+
 def state_average_two_years(year1, year2, years_after, filepath):
     file = open(filepath, 'r')
     period1_state_to_average = dict()
@@ -91,6 +93,7 @@ def state_average_two_years(year1, year2, years_after, filepath):
         period2_state_to_average[key] = round(period2_state_to_average.get(key) / (12 * years_after), 2)
         period1_state_to_average[key] = round(period1_state_to_average.get(key) / (12 * years_after), 2)
     return [period1_state_to_average, period2_state_to_average]
+
 
 def land_and_ocean_yearly(filepath):
     file = open(filepath, 'r')
